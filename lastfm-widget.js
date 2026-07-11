@@ -1,52 +1,93 @@
 const LASTFM_API_KEY = '4dcf196922253144fa4d2429d9d17ba3';
 const LASTFM_USER = 'mondlichtbat';
+const LETTERBOXD_USER = 'mondlichtbat';
 
+// ── CURRENT BOOK (edit this manually) ──────────────────────
+const CURRENT_BOOK = {
+  title: 'Book title here',
+  author: 'Author name here',
+  cover: '', // paste a cover image URL here, or leave empty
+  link: '',  // paste a StoryGraph or Goodreads link here, or leave empty
+  status: 'currently reading' // or 'last read'
+};
+
+// ── LAST.FM ─────────────────────────────────────────────────
 async function fetchLastFm() {
   const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&limit=1&format=json`;
-
   try {
     const res = await fetch(url);
     const data = await res.json();
     const track = data.recenttracks.track[0];
-
     const isNowPlaying = track['@attr'] && track['@attr']['nowplaying'] === 'true';
-    const title = track.name;
-    const artist = track.artist['#text'];
-    const album = track.album['#text'];
-    const image = track.image[2]['#text'] || '';
-    const url_track = track.url;
 
-    const dot = document.getElementById('lfm-dot');
-    const status = document.getElementById('lfm-status');
-    const art = document.getElementById('lfm-art');
-    const trackEl = document.getElementById('lfm-track');
-    const artistEl = document.getElementById('lfm-artist');
-    const albumEl = document.getElementById('lfm-album');
-    const link = document.getElementById('lfm-link');
+    document.getElementById('lfm-dot').classList.toggle('now-playing', isNowPlaying);
+    document.getElementById('lfm-status').textContent = isNowPlaying ? 'listening now' : 'last played';
 
-    if (isNowPlaying) {
-      dot.classList.add('now-playing');
-      status.textContent = 'listening now';
-    } else {
-      dot.classList.remove('now-playing');
-      status.textContent = 'last played';
-    }
+    const img = document.getElementById('lfm-art');
+    const src = track.image[2]['#text'];
+    if (src) { img.src = src; img.style.display = 'block'; }
 
-    if (image) {
-      art.src = image;
-      art.style.display = 'block';
-    }
-
-    trackEl.textContent = title;
-    artistEl.textContent = artist;
-    albumEl.textContent = album;
-    link.href = url_track;
-
+    document.getElementById('lfm-track').textContent = track.name;
+    document.getElementById('lfm-artist').textContent = track.artist['#text'];
+    document.getElementById('lfm-album').textContent = track.album['#text'];
+    document.getElementById('lfm-link').href = track.url;
   } catch (e) {
-    document.getElementById('lfm-widget').innerHTML = '<p class="lfm-error">couldn\'t load music data</p>';
+    document.getElementById('lfm-widget').innerHTML = '<p class="media-error">couldn\'t load music data</p>';
   }
 }
 
+// ── LETTERBOXD RSS ──────────────────────────────────────────
+async function fetchLetterboxd() {
+  const rss = `https://api.rss2json.com/v1/api.json?rss_url=https://letterboxd.com/${LETTERBOXD_USER}/rss/`;
+  try {
+    const res = await fetch(rss);
+    const data = await res.json();
+    const item = data.items[0];
+
+    // extract poster from description HTML
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(item.description, 'text/html');
+    const imgEl = doc.querySelector('img');
+    const poster = imgEl ? imgEl.src : '';
+
+    // extract star rating from title e.g. "The Substance - ★★★★"
+    const titleRaw = item.title;
+    const starMatch = titleRaw.match(/★+/);
+    const stars = starMatch ? starMatch[0] : '';
+    const filmTitle = titleRaw.replace(/\s*-\s*★+/, '').replace(/\s*-\s*½/, '').trim();
+
+    const art = document.getElementById('lb-art');
+    if (poster) { art.src = poster; art.style.display = 'block'; }
+
+    document.getElementById('lb-title').textContent = filmTitle;
+    document.getElementById('lb-stars').textContent = stars;
+    document.getElementById('lb-link').href = item.link;
+
+    // try to get year from description
+    const yearMatch = item.description.match(/\b(19|20)\d{2}\b/);
+    if (yearMatch) document.getElementById('lb-year').textContent = yearMatch[0];
+
+  } catch (e) {
+    document.getElementById('lb-widget').innerHTML = '<p class="media-error">couldn\'t load film data</p>';
+  }
+}
+
+// ── READING (static) ────────────────────────────────────────
+function renderBook() {
+  document.getElementById('book-status').textContent = CURRENT_BOOK.status;
+  document.getElementById('book-title').textContent = CURRENT_BOOK.title;
+  document.getElementById('book-author').textContent = CURRENT_BOOK.author;
+
+  const art = document.getElementById('book-art');
+  if (CURRENT_BOOK.cover) { art.src = CURRENT_BOOK.cover; art.style.display = 'block'; }
+
+  const link = document.getElementById('book-link');
+  if (CURRENT_BOOK.link) { link.href = CURRENT_BOOK.link; }
+  else { link.style.pointerEvents = 'none'; }
+}
+
+// ── INIT ─────────────────────────────────────────────────────
 fetchLastFm();
-// refresh every 30 seconds
+fetchLetterboxd();
+renderBook();
 setInterval(fetchLastFm, 30000);
