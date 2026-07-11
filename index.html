@@ -95,24 +95,75 @@
     </div>
   </section>
 <!-- LAST.FM -->
-<section class="lfm-section">
-  <div id="lfm-widget">
+<!-- ═══════════════════════════════════════════════════
+     REPLACE your entire existing last.fm section with
+     all three sections below
+     ═══════════════════════════════════════════════════ -->
+
+
+<!-- LISTENING -->
+<section class="media-section" id="lfm-widget">
+  <div class="media-inner">
     <h2>what i'm listening to</h2>
-    <a class="lfm-card" id="lfm-link" href="https://www.last.fm/user/mondlichtbat" target="_blank" rel="noopener">
-      <img class="lfm-art" id="lfm-art" src="" alt="album art">
-      <div class="lfm-info">
-        <div class="lfm-status-row">
-          <span class="lfm-dot" id="lfm-dot"></span>
-          <span class="lfm-status" id="lfm-status">loading...</span>
+    <a class="media-card" id="lfm-link" href="https://www.last.fm/user/mondlichtbat" target="_blank" rel="noopener">
+      <img class="media-art" id="lfm-art" src="" alt="album art">
+      <div class="media-info">
+        <div class="media-status-row">
+          <span class="media-dot" id="lfm-dot"></span>
+          <span class="media-status" id="lfm-status">loading...</span>
         </div>
-        <span class="lfm-track" id="lfm-track">—</span>
-        <span class="lfm-artist" id="lfm-artist">—</span>
-        <span class="lfm-album" id="lfm-album"></span>
+        <span class="media-title" id="lfm-track">—</span>
+        <span class="media-sub" id="lfm-artist">—</span>
+        <span class="media-meta" id="lfm-album"></span>
       </div>
-      <span class="lfm-icon">↗</span>
+      <span class="media-arrow">↗</span>
     </a>
-    <a class="lfm-profile-link" href="https://www.last.fm/user/mondlichtbat" target="_blank" rel="noopener">
+    <a class="media-profile-link" href="https://www.last.fm/user/mondlichtbat" target="_blank" rel="noopener">
       view full profile on last.fm
+    </a>
+  </div>
+</section>
+
+
+<!-- WATCHING -->
+<section class="media-section alt" id="lb-widget">
+  <div class="media-inner">
+    <h2>what i'm watching</h2>
+    <a class="media-card" id="lb-link" href="https://letterboxd.com/mondlichtbat/" target="_blank" rel="noopener">
+      <img class="media-art tall" id="lb-art" src="" alt="film poster">
+      <div class="media-info">
+        <div class="media-status-row">
+          <span class="media-dot"></span>
+          <span class="media-status">last watched</span>
+        </div>
+        <span class="media-title" id="lb-title">—</span>
+        <span class="media-sub" id="lb-stars"></span>
+        <span class="media-meta" id="lb-year"></span>
+      </div>
+      <span class="media-arrow">↗</span>
+    </a>
+    <a class="media-profile-link" href="https://letterboxd.com/mondlichtbat/" target="_blank" rel="noopener">
+      view full diary on letterboxd
+    </a>
+  </div>
+</section>
+
+
+<!-- READING -->
+<section class="media-section" id="book-widget">
+  <div class="media-inner">
+    <h2>what i'm reading</h2>
+    <a class="media-card" id="book-link" href="#" target="_blank" rel="noopener">
+      <img class="media-art tall" id="book-art" src="" alt="book cover">
+      <div class="media-info">
+        <div class="media-status-row">
+          <span class="media-dot"></span>
+          <span class="media-status" id="book-status">currently reading</span>
+        </div>
+        <span class="media-title" id="book-title">—</span>
+        <span class="media-sub" id="book-author">—</span>
+      </div>
+      <span class="media-arrow">↗</span>
     </a>
   </div>
 </section>
