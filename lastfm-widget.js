@@ -4,10 +4,10 @@ const LETTERBOXD_USER = 'mondlichtbat';
 
 // ── CURRENT BOOK (edit this manually) ──────────────────────
 const CURRENT_BOOK = {
-  title: 'Book title here',
-  author: 'Author name here',
-  cover: '', // paste a cover image URL here, or leave empty
-  link: '',  // paste a StoryGraph or Goodreads link here, or leave empty
+  title: 'Madame Bovary',
+  author: 'Gustave Flaubert',
+  cover: '' 'https://cdn.thestorygraph.com/0d7tijj7z3c778pxfk5odnh01r48',
+  link: '' 'https://app.thestorygraph.com/books/140dd356-e00e-4b79-85a3-fb8a6b4de1e2',
   status: 'currently reading' // or 'last read'
 };
 
