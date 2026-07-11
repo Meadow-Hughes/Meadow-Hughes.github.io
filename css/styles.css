@@ -408,3 +408,142 @@ p {
 .lfm-profile-link:hover {
   color: var(--rose);
 }
+
+/* ── MEDIA SECTIONS ────────────────────────── */
+.media-section {
+  padding: 4rem 2rem;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.media-section.alt {
+  background: var(--bg-alt);
+}
+
+.media-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.media-inner h2 {
+  margin-bottom: 1.5rem;
+}
+
+.media-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--bg-card);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+
+.media-card:hover {
+  border-color: var(--rose-dark);
+}
+
+.media-art {
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: none;
+  background: var(--border);
+}
+
+.media-art.tall {
+  width: 44px;
+  height: 64px;
+  border-radius: 3px;
+}
+
+.media-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.media-status-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.media-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rose-dark);
+  flex-shrink: 0;
+}
+
+.media-dot.now-playing {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.media-status {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.media-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--rose);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.media-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 0.15rem;
+}
+
+.media-meta {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  display: block;
+  margin-top: 0.1rem;
+}
+
+.media-arrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--rose-dark);
+  flex-shrink: 0;
+}
+
+.media-profile-link {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rose-dark);
+  text-decoration: none;
+}
+
+.media-profile-link:hover {
+  color: var(--rose);
+}
+
+.media-error {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* remove old lfm-specific styles if present */
+.lfm-section, .lfm-card, .lfm-art, .lfm-info,
+.lfm-status-row, .lfm-dot, .lfm-status, .lfm-track,
+.lfm-artist, .lfm-album, .lfm-icon, .lfm-error,
+.lfm-profile-link { all: unset; display: none; }
